@@ -24,7 +24,7 @@ public class ColourBaloon {
 
         while(middlePointer < endPointer){
 
-            if (arr[middlePointer].equals("r")){
+            if (arr[middlePointer].equals(firstKey)){
                 temp = arr[startPointer];
                 arr[startPointer]= arr[middlePointer];
                 arr[middlePointer] = temp;
@@ -34,11 +34,11 @@ public class ColourBaloon {
 
             }
 
-            if (arr[middlePointer].equals("g")){
+            if (arr[middlePointer].equals(secondKey)){
                 middlePointer ++;
             }
 
-            if (arr[middlePointer].equals("b")){
+            if (arr[middlePointer].equals(thirdKey)){
                 temp = arr[middlePointer];
                 arr[middlePointer]= arr[endPointer];
                 arr[endPointer] = temp;
