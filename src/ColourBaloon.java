@@ -20,9 +20,11 @@ public class ColourBaloon {
         int middlePointer = 0;
         int endPointer = arr.length-1;
 
-        while(middlePointer <= endPointer){
 
-            if (arr[middlePointer] == firstKey){
+
+        while(middlePointer < endPointer){
+
+            if (arr[middlePointer].equals("r")){
                 temp = arr[startPointer];
                 arr[startPointer]= arr[middlePointer];
                 arr[middlePointer] = temp;
@@ -32,11 +34,11 @@ public class ColourBaloon {
 
             }
 
-            if (arr[middlePointer] == secondKey){
+            if (arr[middlePointer].equals("g")){
                 middlePointer ++;
             }
 
-            if (arr[middlePointer] == thirdKey){
+            if (arr[middlePointer].equals("b")){
                 temp = arr[middlePointer];
                 arr[middlePointer]= arr[endPointer];
                 arr[endPointer] = temp;
@@ -46,6 +48,7 @@ public class ColourBaloon {
             }
 
         }
+
         for(int i=0; i <arr.length; i++){
             System.out.print(arr[i] + " ");
         }
