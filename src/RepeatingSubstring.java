@@ -21,17 +21,21 @@ public class RepeatingSubstring {
         String arr1[];
         String temp[];
         int n = str.length();
+//        System.out.println(n);
         for(int i = 0; i < n; i++){
             for(int j = i+1; j < n; j++){
+//                System.out.print(str.substring(i,n)+":"+str.substring(j,n)+"#");
                 String x = lcp(str.substring(i,n),str.substring(j,n));
+//                System.out.print(x+",");
                 if(x.length()>2){
                     arr.add(x);
                 }
                 if(x.length() > lrs.length()) lrs=x;
             }
         }
+        System.out.println(arr);
         int arrlength = arr.size();
-        for(int z=0; z < arrlength; z++){
+//        for(int z=0; z < arrlength; z++){
             for(int i = 0; i < arrlength; i++){
                 for(int j = 0; j < arrlength; j++){
                     String temp1 = arr.get(i);
@@ -44,7 +48,16 @@ public class RepeatingSubstring {
                     }
                 }
             }
+//        }
+    if(arr.size() >= 2) {
+        for (int i = 0; i < arr.size()-1; i++) {
+            if (arr.get(i).contains(arr.get(i + 1))) {
+                if (arr.get(i).length() > arr.get(i + 1).length()) {
+                    arr.remove(i + 1);
+                }
+            }
         }
+    }
         if(arr.size() > 0) {
             for(int i = 0; i < arr.size(); i++){
                 System.out.print(arr.get(i)+",");
