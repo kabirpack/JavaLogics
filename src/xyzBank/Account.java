@@ -2,30 +2,27 @@ package xyzBank;
 
 public class Account {
     private String name;
-    private String number;
-    private String dob;
-    private String phoneNumber;
-    private String aadharNumber;
-    private final double minimumBalance = 100.00;
+    private long number;
     private double balance;
-    private Bank bank;
+    private DebitCard debitcard;
+    private CreditCard creditCard;
 
-    public Account(String name, String number, String dob, String phoneNumber, String aadharNumber, double balance, Bank bank) {
+    public Account(String name, long number) {
         this.name = name;
         this.number = number;
-        this.dob = dob;
-        this.phoneNumber = phoneNumber;
-        this.aadharNumber = aadharNumber;
-        this.balance = balance;
-        this.bank = bank;
+        this.balance = 100.00;
+    }
+
+    public double getBalance() {
+        return balance;
     }
 
     public String getName() {
         return name;
     }
 
-    public double getBalance() {
-        return balance;
+    public long getNumber() {
+        return number;
     }
 
     public void debit(double amount){
@@ -39,20 +36,13 @@ public class Account {
     public void cashBack(double amount){
         this.balance += amount;
     }
-
-    public String getNumber() {
-        return number;
+    public CreditCard createCreditCard(long cardNumber, String validFrom, String validTo, int cvv, int pin) {
+        this.creditCard = new CreditCard(this,cardNumber,validFrom,validTo,cvv,pin);
+        return creditCard;
     }
 
-    public String getDob() {
-        return dob;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public String getAadharNumber() {
-        return aadharNumber;
+    public DebitCard  createDebitCard(long cardNumber, String validFrom, String validTo, int cvv, int pin) {
+        this.debitcard = new DebitCard(this,cardNumber,validFrom,validTo,cvv,pin);
+        return debitcard;
     }
 }

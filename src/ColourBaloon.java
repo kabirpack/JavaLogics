@@ -57,7 +57,7 @@ public class ColourBaloon {
 
     public static void main(String[] args){
 
-        String[] arrBaloon = new String[]{"r", "g", "b", "g", "b", "g", "r"};
+        String[] arrBaloon = new String[]{"r", "r", "b", "r", "g", "b", "g", "b", "g", "r",};
         baloonSort(arrBaloon);
     }
 }

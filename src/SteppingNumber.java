@@ -2,40 +2,43 @@ import java.util.Scanner;
 
 public class SteppingNumber {
 
-    public static int firstLastDiff(int num){
-        if(Integer.toString(num).trim().length() == 1){
-            return 1;
-        }
-        int lastDigit = num % 10;
-        int firstDigit = num;
-         while (firstDigit >= 10){
-             firstDigit /= 10;
-         }
-        return Math.abs(firstDigit-lastDigit);
-    }
-
     public static boolean isStepNum(int n)
     {
-        int prevDigit = -1;
-        while (n > 0)
-        {
-            int curDigit = n % 10;
-            if (prevDigit != -1)
-            {
-                if (Math.abs(curDigit-prevDigit) != 1)
-                    return false;
-            }
-            n /= 10;
-            prevDigit = curDigit;
+        int flag = 0;
+        if(Integer.toString(n).trim().length() == 1){
+            flag = 1;
+            return true;
         }
-        return true;
+
+        if(flag == 0) {
+            int lastDigit = n % 10;
+            int firstDigit = n;
+            while (firstDigit >= 10){
+                firstDigit /= 10;
+            }
+            if(Math.abs(firstDigit-lastDigit) != 1){
+                return false;
+            }
+            int prevDigit = -1;
+            while (n > 0) {
+                int curDigit = n % 10;
+                if (prevDigit != -1) {
+                    if (Math.abs(curDigit - prevDigit) != 1)
+                        return false;
+                }
+                n /= 10;
+                prevDigit = curDigit;
+            }
+            return true;
+        }
+        return false;
     }
 
     public static void displaySteppingNumbers(int n,int m)
     {
         int count = 0;
         for (int i = n; i <= m; i++) {
-            if (firstLastDiff(i) == 1 && isStepNum(i)) {
+            if (isStepNum(i)) {
                 System.out.print(i + " ");
                 count = count + 1;
             }

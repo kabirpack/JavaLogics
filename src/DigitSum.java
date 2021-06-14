@@ -25,18 +25,15 @@ public class DigitSum {
 
     }
     public static boolean isTrap(int x, int y){
-        if(digitCount(x) == 1 && x != y){
-            if(x%y !=0 && y%x != 0) {
-                return false;
-            }
-        }
+//        if(digitCount(x) == 1 && x != y && (x%y !=0 && y%x != 0)){
+//                return false;
+//        }
 
-        if(x == y){
+        if((x == y) || (x%y == 0 || y%x == 0)){
             return true;
-        }else if(x%y == 0 || y%x == 0){
-            return true;
-        }else if(isTrap(digitSum(x),y)){
-            return true;
+        }
+        else if(digitCount(x) > 1){
+            return isTrap(digitSum(x),y);
         }
     return false;
     }

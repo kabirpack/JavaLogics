@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class RepeatingSubstring {
@@ -12,60 +13,102 @@ public class RepeatingSubstring {
         return s.substring(0,n);
     }
 
+    public static ArrayList<String> remove(ArrayList<String> arr){
+        int arrlength = arr.size();
+
+        for(int i = 0; i < arrlength; i++){
+            for(int j = i+1; j < arrlength; j++){
+                String temp1 = arr.get(i);
+                temp1 = temp1.trim();
+                String temp2 = arr.get(j);
+                temp2 = temp2.trim();
+                if(temp1.contains(temp2)){
+                    if(temp1.length() > temp2.length()){
+                        arr.set(j,"");
+
+                    }
+                    if(temp1.length() == temp2.length()){
+                        arr.set(j,"");
+                    }
+                }
+            }
+        }
+
+        return arr;
+
+    }
+
+
     public static void main(String[] args) {
         Scanner sc=new Scanner(System.in);
-        String input =sc.nextLine();
+        String input ="everyday everything everyday";
         String str = input.toLowerCase();
+        str = str.trim();
         String lrs="";
         ArrayList<String> arr = new ArrayList<String>();
         String arr1[];
         String temp[];
         int n = str.length();
-//        System.out.println(n);
+
+
         for(int i = 0; i < n; i++){
             for(int j = i+1; j < n; j++){
-//                System.out.print(str.substring(i,n)+":"+str.substring(j,n)+"#");
+
                 String x = lcp(str.substring(i,n),str.substring(j,n));
-//                System.out.print(x+",");
+
                 if(x.length()>2){
                     arr.add(x);
                 }
                 if(x.length() > lrs.length()) lrs=x;
             }
         }
-        System.out.println(arr);
-        int arrlength = arr.size();
-//        for(int z=0; z < arrlength; z++){
-            for(int i = 0; i < arrlength; i++){
-                for(int j = 0; j < arrlength; j++){
-                    String temp1 = arr.get(i);
-                    String temp2 = arr.get(j);
-                    if(temp1.contains(temp2)){
-                        if(temp1.length() > temp2.length()){
-                            arr.remove(j);
-                            arrlength = arrlength-1;
-                        }
-                    }
-                }
-            }
-//        }
-    if(arr.size() >= 2) {
-        for (int i = 0; i < arr.size()-1; i++) {
-            if (arr.get(i).contains(arr.get(i + 1))) {
-                if (arr.get(i).length() > arr.get(i + 1).length()) {
-                    arr.remove(i + 1);
-                }
-            }
-        }
-    }
-        if(arr.size() > 0) {
-            for(int i = 0; i < arr.size(); i++){
-                System.out.print(arr.get(i)+",");
-            }
-//            System.out.println("Longest repeating sequence: " + arr);
-        }else{
-            System.out.println("No substring found");
-        }
-    }
-}  
 
+        ArrayList<String> removeResult = new ArrayList<String>();
+        //first iteration arr=>removeResult
+        removeResult = remove(arr);
+
+        //----------------------------------------------
+
+        ArrayList<String> small = new ArrayList<String>();
+
+        //remove space and formating (removeResult)=>small
+        for(int z = 0; z < removeResult.size(); z++){
+            if(removeResult.get(z).length()>0){
+                String temp1 = removeResult.get(z);
+                String[] splited = temp1.split("\\s+");
+                for(int w=0; w < splited.length ; w++){
+                    small.add(splited[w]);
+                }
+            }
+        }
+
+        ArrayList<String> removeResult1 = new ArrayList<String>();
+        //second iteration small=>removeResult1
+        removeResult1 = remove(small);
+
+
+        //--------------------------------------------
+
+
+        //reverse of removeResult1
+        Collections.reverse(removeResult1);
+        ArrayList<String> afterReverse = new ArrayList<String>();
+        //third iteration removeResult=>afterReverse
+        afterReverse = remove(removeResult1);
+
+        int count = 0;
+        //ANSWER afterReverse
+        for(int i=0;i<afterReverse.size();i++){
+            if(afterReverse.get(i) != ""){
+                System.out.print(afterReverse.get(i)+"");
+                count++;
+            }
+        }
+        if(count == 0){
+            System.out.println("No repeating substring found");
+        }
+
+
+
+    }
+}

@@ -1,6 +1,6 @@
 package xyzBank;
 
-public class DebitCard {
+public class CreditCard {
     private Account account;
     private long number;
     private String validFrom;
@@ -8,7 +8,7 @@ public class DebitCard {
     private int cvv;
     private int pin;
 
-    public DebitCard(Account account, long number, String validFrom, String validTo, int cvv, int pin) {
+    public CreditCard(Account account, long number, String validFrom, String validTo, int cvv, int pin) {
         this.account = account;
         this.number = number;
         this.validFrom = validFrom;
@@ -29,6 +29,10 @@ public class DebitCard {
         return account.getNumber();
     }
 
+    public int getPin() {
+        return pin;
+    }
+
     public void debit(double amount){
         account.debit(amount);
     }
@@ -37,7 +41,8 @@ public class DebitCard {
         account.deposit(amount);
     }
 
-    public int getPin() {
-        return pin;
+    public void cashBack(double amount){
+        account.cashBack(amount);
     }
+
 }
